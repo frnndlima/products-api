@@ -1,0 +1,58 @@
+name: dockercompose7321479568386246654
+services:
+  api:
+    build:
+      context: C:\Users\nanda\Desktop\estudos-microsoft\vertical-slice\VerticalSlices
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_started
+        required: true
+    environment:
+      ConnectionStrings__DefaultConnection: Server=db,1433;Database=productsdb;User ID=sa;Password=1q2w3e4r@#$$;Trusted_Connection=False;TrustServerCertificate=True;
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "5000"
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        published: "5001"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\nanda\Desktop\estudos-microsoft\vertical-slice\VerticalSlices
+        target: /src
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /src/src/Products.API
+        target: /app
+        bind:
+          create_host_path: true
+  db:
+    container_name: sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: 1q2w3e4r@#$$
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 1433
+        published: "1433"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: sqlserverdata
+        target: /var/opt/mssql
+        volume: {}
+networks:
+  default:
+    name: dockercompose7321479568386246654_default
+volumes:
+  sqlserverdata:
+    name: dockercompose7321479568386246654_sqlserverdata

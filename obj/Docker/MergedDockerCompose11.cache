@@ -1,0 +1,68 @@
+name: dockercompose7321479568386246654
+services:
+  products.api:
+    build:
+      context: C:\Users\nanda\Desktop\estudos-microsoft\vertical-slice\VerticalSlices
+      dockerfile: src/Products.API/Dockerfile
+    depends_on:
+      sqlserver:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ASPNETCORE_HTTPS_PORTS: "8081"
+      ConnectionStrings__DefaultConnection: Server=sqlserver,1433;Database=productsdb;User ID=sa;Password=1q2w3e4r@#$$;Trusted_Connection=False;TrustServerCertificate=True;
+    image: productsapi
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "8080"
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        published: "8081"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\nanda\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\nanda\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+  sqlserver:
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: 1q2w3e4r@#$$
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 1433
+        published: "1433"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: sqlserver-data
+        target: /var/opt/mssql
+        volume: {}
+      - type: bind
+        source: C:\Users\nanda\Desktop\estudos-microsoft\vertical-slice\VerticalSlices\init-db.sql
+        target: /docker-entrypoint-initdb.d/init-db.sql
+        bind:
+          create_host_path: true
+networks:
+  default:
+    name: dockercompose7321479568386246654_default
+volumes:
+  sqlserver-data:
+    name: dockercompose7321479568386246654_sqlserver-data
