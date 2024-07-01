@@ -3,7 +3,6 @@ This API is built on .NET 8, leveraging modern practices such as Vertical Slice 
 ## Key Technologies
 
 - **.NET 8**
-- **Vertical Slices**
 - **Minimal APIs**
 - **Entity Framework Core**
 - **Carter**
