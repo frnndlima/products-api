@@ -16,8 +16,8 @@ services:
       - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
       - NUGET_FALLBACK_PACKAGES=
     volumes:
-      - C:\Users\nanda\Desktop\estudos-microsoft\vertical-slice\VerticalSlices\src\Products.API:/app
-      - C:\Users\nanda\Desktop\estudos-microsoft\vertical-slice\VerticalSlices:/src
+      - C:\Users\nanda\Desktop\VERTI\products-api\src\Products.API:/app
+      - C:\Users\nanda\Desktop\VERTI\products-api:/src
       - C:\Users\nanda\vsdbg\vs2017u5:/remote_debugger:rw
       - C:\Users\nanda\.nuget\packages\:/.nuget/packages:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

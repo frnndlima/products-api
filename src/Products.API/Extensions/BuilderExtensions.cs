@@ -1,5 +1,4 @@
 ﻿using BuildingBlocks.Exceptions.Handler;
-using Products.API.Data;
 using Products.API.Shared.Behaviors;
 
 namespace Products.API.Extensions;
