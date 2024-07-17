@@ -1,5 +1,3 @@
-This API is built on .NET 8, leveraging modern practices such as Vertical Slice Arch, Minimal APIs, Carter, Mapster for object mapping, and Entity Framework Core for data access. It implements CQRS with Mediatr for command and query separation. The project includes pipeline behaviors for exception handling, validation, and logging, along with a health check for SQL Server. Both the application and SQL Server run within Docker containers managed by Docker Compose.
-
 ## Key Technologies
 
 - **.NET 8**
